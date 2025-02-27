@@ -136,15 +136,51 @@ const p1 = { x: centerX, y: centerY - triangleHeight / 2 }; // Vertice superiore
 const p2 = { x: centerX - halfBase, y: centerY + triangleHeight / 2 }; // Base sinistra
 const p3 = { x: centerX + halfBase, y: centerY + triangleHeight / 2 }; // Base destra
 
-// **Disegna il triangolo**
-ctx.fillStyle = fillColor;
-ctx.strokeStyle = strokeColor;
-ctx.lineWidth = strokeWidth;
+// // **Disegna il triangolo**
+// ctx.fillStyle = fillColor;
+// ctx.strokeStyle = strokeColor;
+// ctx.lineWidth = strokeWidth;
 
-ctx.beginPath();
-ctx.moveTo(p1.x, p1.y);
-ctx.lineTo(p2.x, p2.y);
-ctx.lineTo(p3.x, p3.y);
-ctx.closePath();
-ctx.fill();
-ctx.stroke();
+// ctx.beginPath();
+// ctx.moveTo(p1.x, p1.y);
+// ctx.lineTo(p2.x, p2.y);
+// ctx.lineTo(p3.x, p3.y);
+// ctx.closePath();
+// ctx.fill();
+// ctx.stroke();
+
+let circles = [];
+
+        // Aggiunge un cerchio al click
+        canvas.addEventListener("click", function(event) {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            const color = `hsl(${Math.random() * 360}, 100%, 60%)`; // Genera un colore casuale
+
+            circles.push({ x, y, radius: 30, alpha: 1, color });
+        });
+
+        function drawCircles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < circles.length; i++) {
+                let circle = circles[i];
+
+                ctx.beginPath();
+                ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = circle.color; 
+                ctx.fill();
+                
+                circle.alpha -= 0.02;  // Il cerchio svanisce lentamente
+
+                if (circle.alpha <= 0) {
+                    circles.splice(i, 1);
+                    i--;
+                }
+            }
+
+            requestAnimationFrame(drawCircles);
+        }
+
+        drawCircles();
