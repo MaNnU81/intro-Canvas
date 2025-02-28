@@ -1,8 +1,8 @@
 
 
-// // const canvas = document.getElementById('my-canvas');
+const canvas = document.getElementById('my-canvas');
 
-// // const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d');
 
 // // ctx.fillStyle = 'red';
 // // ctx.fillRect(10, 10, 100, 50)
@@ -52,70 +52,70 @@
 // // }, 300);
 
 
-// // ///////PATTERN
-// // // **Variabili configurabili**
-// // const squareSize = 50; // Lato del quadrato
-// // const spacing = 120; // Distanza tra i vertici dei quadrati
-// // const rows = 3; // Numero di righe di quadrati
-// // const offsetY = 60; // Offset della prima riga
-// // const verticalSpacing = (canvas.height - offsetY) / rows; // Distanza verticale tra le righe
-// // const colorFill = "orange"; // Colore riempimento
-// // const colorStroke = "red"; // Colore bordo
-// // const strokeWidth = 4; // Spessore bordo
-// // const angle = Math.PI / 4; // Rotazione di 45°
-// // const normalLineWidth = 1; // Spessore righe normali
-// // const thickLineWidth = normalLineWidth * 4; // Spessore linea spezzata
+///////PATTERN
+// **Variabili configurabili**
+const squareSize = 50; // Lato del quadrato
+const spacing = 120; // Distanza tra i vertici dei quadrati
+const rows = 3; // Numero di righe di quadrati
+const offsetY = 60; // Offset della prima riga
+const verticalSpacing = (canvas.height - offsetY) / rows; // Distanza verticale tra le righe
+const colorFill = "orange"; // Colore riempimento
+const colorStroke = "red"; // Colore bordo
+const strokeWidth = 4; // Spessore bordo
+const angle = Math.PI / 4; // Rotazione di 45°
+const normalLineWidth = 1; // Spessore righe normali
+const thickLineWidth = normalLineWidth * 4; // Spessore linea spezzata
 
-// // ctx.strokeStyle = "black";
-// // ctx.lineWidth = normalLineWidth;
+ctx.strokeStyle = "black";
+ctx.lineWidth = normalLineWidth;
 
-// // // **Trova le posizioni delle colonne da saltare**
-// // let skipPositions = [];
-// // for (let x = spacing; x <= canvas.width - 60; x += spacing) {
-// //     skipPositions.push(x - 10, x, x + 10); // Salta la riga in corrispondenza del vertice + le due adiacenti
-// // }
+// **Trova le posizioni delle colonne da saltare**
+let skipPositions = [];
+for (let x = spacing; x <= canvas.width - 60; x += spacing) {
+    skipPositions.push(x - 10, x, x + 10); // Salta la riga in corrispondenza del vertice + le due adiacenti
+}
 
-// // // **Disegna le linee verticali**
-// // for (let x = 0; x <= canvas.width; x += 10) {
-// //     if (skipPositions.includes(x)) { 
-// //         // **Spazio vuoto: disegna linea spezzata più spessa**
-// //         ctx.lineWidth = thickLineWidth; 
-// //         ctx.beginPath();
-// //         for (let y = 0; y < canvas.height; y += 20) {
-// //             ctx.moveTo(x, y);
-// //             ctx.lineTo(x, y + 10);
-// //         }
-// //         ctx.stroke();
-// //         ctx.lineWidth = normalLineWidth; // Ripristina spessore normale
-// //     } else {
-// //         // **Righe normali**
-// //         ctx.beginPath();
-// //         ctx.moveTo(x, 0);
-// //         ctx.lineTo(x, canvas.height);
-// //         ctx.stroke();
-// //     }
-// // }
+// **Disegna le linee verticali**
+for (let x = 0; x <= canvas.width; x += 10) {
+    if (skipPositions.includes(x)) { 
+        // **Spazio vuoto: disegna linea spezzata più spessa**
+        ctx.lineWidth = thickLineWidth; 
+        ctx.beginPath();
+        for (let y = 0; y < canvas.height; y += 20) {
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, y + 10);
+        }
+        ctx.stroke();
+        ctx.lineWidth = normalLineWidth; // Ripristina spessore normale
+    } else {
+        // **Righe normali**
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+    }
+}
 
-// // // **Loop per disegnare le tre file di quadrati**
-// // for (let row = 0; row < rows; row++) {
-// //     let yPosition = offsetY + row * verticalSpacing; // Calcola la posizione verticale della riga
+// **Loop per disegnare le tre file di quadrati**
+for (let row = 0; row < rows; row++) {
+    let yPosition = offsetY + row * verticalSpacing; // Calcola la posizione verticale della riga
 
-// //     for (let x = spacing; x <= canvas.width - 60; x += spacing) {
-// //         ctx.save();
-// //         ctx.translate(x, yPosition); // Sposta l'origine
-// //         ctx.rotate(angle); // Ruota il quadrato
+    for (let x = spacing; x <= canvas.width - 60; x += spacing) {
+        ctx.save();
+        ctx.translate(x, yPosition); // Sposta l'origine
+        ctx.rotate(angle); // Ruota il quadrato
 
-// //         ctx.fillStyle = colorFill;
-// //         ctx.strokeStyle = colorStroke;
-// //         ctx.lineWidth = strokeWidth;
+        ctx.fillStyle = colorFill;
+        ctx.strokeStyle = colorStroke;
+        ctx.lineWidth = strokeWidth;
 
-// //         ctx.beginPath();
-// //         ctx.rect(-squareSize / 2, -squareSize / 2, squareSize, squareSize);
-// //         ctx.fill();
-// //         ctx.stroke();
-// //         ctx.restore();
-// //     }
-// // }
+        ctx.beginPath();
+        ctx.rect(-squareSize / 2, -squareSize / 2, squareSize, squareSize);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+    }
+}
 
 
 // /////////fine pattern
