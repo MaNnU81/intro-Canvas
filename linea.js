@@ -12,7 +12,7 @@ const positiveYBasket = [15, 135, 255, 375, 495];
 const negativeYBasket = [75, 195, 315, 435, 555]; // Solo alcune Y per velocità negativa
 
 function speedGenerator(isPositive) {
-  const speed = Math.round((Math.random() * 6) + 1);
+  const speed = Math.round((Math.random() * 12) + 1);
   return isPositive ? speed : -speed;
 }
 
