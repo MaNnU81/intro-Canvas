@@ -1,12 +1,12 @@
-body{
-background: #313131;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
+body {
+    height: 100vh;
+    background-color: #313131;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.canvas{
-background-color: rgb(10, 240, 163);
 
+.sample-canvas {
+    background-color: white;
 }
