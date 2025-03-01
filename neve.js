@@ -5,14 +5,7 @@ let canvas;
 let ctx;
 let snowflakes = [];
 
-const snowFlakeImages = [ 
-    'assets\pallina1.png',
-    'assets\pallina2.png',
-    'assets\snowflake1.png',
-     'assets\snowflake4.png',
-     'assets\snowflake3.png',
-     'assets\snowflake2.png'
-    ];
+
 function drawRandomSnowflake(x, y) {
     const randomIndex = Math.floor(Math.random() * snowflakes.length);
     const img = snowflakes[randomIndex];
@@ -22,16 +15,28 @@ function drawRandomSnowflake(x, y) {
 
 function drawSnowflakes() {
     for (let i = 0; i < 10; i++) { 
-        let x = Math.random() * canvas.width;
-        let y = Math.random() * canvas.height;
+        let x = Math.random() * 600;
+        let y = Math.random() * 600;
         drawRandomSnowflake(x, y);
     }
 }
 
 
 function setUp() {
-    //carico src immagini
 
+     // Inizializza il canvas
+     canvas = document.getElementById("neve-canvas");
+    ctx = canvas.getContext("2d");
+  
+    //carico src immagini
+    const snowFlakeImages = [ 
+        'assets/pallina1.png',
+        'assets/pallina2.png',
+        'assets/snowflake1.png',
+        'assets/snowflake2.png',
+        'assets/snowflake3.png',
+        'assets/snowflake4.png'
+        ];
     
     //rendo l'array src in array di oggetti image 
     snowflakes = snowFlakeImages.map(function(src) {
@@ -39,11 +44,7 @@ function setUp() {
         img.src = src;
         return img;
     });
-    
-
-    // conta le immagini caricate fino al numero delle immagini stesse, poi chiama l'oggetto casuale
-
-let loadedImages = 0;
+    ;
 snowflakes.forEach(img => {
     img.onload = () => {
         loadedImages++;
@@ -52,6 +53,10 @@ snowflakes.forEach(img => {
         }
     };
 });
+
+    // conta le immagini caricate fino al numero delle immagini stesse, poi chiama l'oggetto casuale
+
+let loadedImages = 0
 
 }
 
@@ -66,7 +71,7 @@ function update() {
 
 function draw() {
      // Pulisci il canvas
-    //  ctx.clearRect(0, 0, canvas.width, canvas.height);
+     ctx.clearRect(0, 0, canvas.width, canvas.height);
      // Disegna i fiocchi di neve
      drawSnowflakes();
 }
